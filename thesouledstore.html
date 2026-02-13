@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Souled Store Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+/* =========================
+   STICKY NAVBAR
+========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+}
+
+/* NAVBAR HOVER LINE */
+.nav-hover {
+  position: relative;
+  font-weight: 600;
+  color: #000;
+  padding-bottom: 6px;
+}
+
+.nav-hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(184, 23, 23);
+  transition: width 0.3s ease;
+}
+
+.nav-hover:hover::after {
+  width: 100%;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.ghostimg img {
+  height: 60px;
+}
+
+.text-of-men a {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* =========================
+   SEARCH SECTION
+========================= */
+.search-wrapper {
+  position: relative;
+  width: 350px;
+  margin-left: auto;
+  margin-right: 55px;
+}
+
+.searchbar {
+  width: 100%;
+  height: 45px;
+  border: 2px solid black;
+  border-radius: 50px;
+  padding-left: 20px;
+  padding-right: 90px;
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+}
+
+.searchbar::placeholder {
+  color: #888;
+  font-weight: 500;
+}
+
+.mic-icon {
+  position: absolute;
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* =========================
+   CARD STYLES
+========================= */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card img:hover {
+  transform: scale(1.03);
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* HEART ICON */
+.product-card::after {
+  content: "♡";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover::after {
+  color: red;
+  transform: scale(1.1);
+}
+
+/* BADGE */
+.product-card::before {
+  content: "RELAXED FIT";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* PRODUCT INFO */
+.product-info {
+  padding: 12px 4px 0;
+}
+
+.product-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.product-category {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.product-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.container.py-5 {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* =========================
+   ICON SECTION
+========================= */
+.iconss {
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.iconss a {
+  position: relative;
+  color: #3E3F45;
+  font-size: 22px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.iconss a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: red;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  transition: 0.3s ease;
+}
+
+.iconss a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  background-color: #efefef;
+}
+
+.footer-title {
+  color: rgb(204, 18, 18);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.homegrown {
+  color: white;
+  background-color: #910e0e;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+  color: #444;
+  cursor: pointer;
+}
+
+.footer-list li:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  background: #eaeaea;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 991px) {
+  .search-wrapper {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .iconss {
+    margin-right: 0;
+    justify-content: start;
+  }
+
+  .navbar-nav {
+    margin-bottom: 15px;
+  }
+}
+
+/* =========================
+   CUSTOM HAMBURGER
+========================= */
+.custom-hamburger {
+  background: white;
+  border: none;
+  width: 70px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.custom-hamburger span {
+  width: 30px;
+  height: 2px;
+  background-color: #555;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <!-- HAMBURGER BUTTON -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- COLLAPSIBLE CONTENT -->
+      <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
+
+        <!-- LEFT MENU -->
+        <ul class="navbar-nav text-of-men">
+
+          <!-- HAMBURGER ICON -->
+          <li class="nav-item">
+            <button class="custom-hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </li>
+
+          <li class="nav-item"><a class="nav-link nav-hover active" href="#">MEN</a></li>
+          <li class="nav-item"><a class="nav-link nav-hover" href="#">WOMEN</a></li>
+          <li class="nav-item"><a class="nav-link nav-hover" href="#">SNEAKERS</a></li>
+        </ul>
+
+        <!-- CENTER LOGO -->
+        <a class="navbar-brand mx-lg-auto ghostimg" href="#">
+          <img src="https://prod-img.thesouledstore.com/static/non-member-logo2.gif" height="40">
+        </a>
+
+        <!-- RIGHT SIDE -->
+        <div class="d-lg-flex align-items-center gap-3">
+
+          <!-- SEARCH BOX -->
+          <div class="search-wrapper">
+            <input class="form-control searchbar" type="search" placeholder="What are you looking for?">
+            <i class="fa-solid fa-microphone mic-icon"></i>
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          </div>
+
+          <!-- ICONS -->
+          <div class="iconss">
+            <a><i class="fa-solid fa-user"></i></a>
+            <a><i class="fa-solid fa-heart"></i></a>
+            <a><i class="fa-solid fa-cart-arrow-down"></i></a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- HERO CAROUSEL -->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_1_ByqCglp.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/trailz_homepage_1.png?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_62.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepgae_4Yvb5Gs.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_1_TdrWhjO.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <h3 class="text-center fw-bold py-4">NEW IN: COLLECTIONS</h3>
+
+  <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/Homepage_ZddV8DN.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/homepage_copy_7_2Y6SRnc.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/Korean_Home_Page_Banner_NIWSOfT.jpg?w=1500&dpr=2"
+          class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h3 class="text-center fw-bold py-lg-4 ">NEW ARRIVALS</h3>
+
+  <div id="carouselpolos1" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="card-group mx-2">
+          <div class="card">
+            <img
+              src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1769857480_7063524.jpg?w=360&dpr=2"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title border-bottom">Cotton Linen Hooded Shirt:Nougat</h5>
+              <p class="card-text"><small class="text-muted">Cotton Linen Shirt</small></p>
+              <p class="card-text"><small class="text-muted">₹1899</small></p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1769849983_3820535.jpg?w=360&dpr=2"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title border-bottom">Cotton Linen Stripes:Nutmeg</h5>
+              <p class="card-text"><small class="text-muted">Cotton Linen Shirt</small></p>
+              <p class="card-text"><small class="text-muted">₹1599</small></p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1769839465_3907693.jpg?w=360&dpr=2"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title border-bottom">Trailz:Summit</h5>
+              <p class="card-text"><small class="text-muted">Men Low Top Sneakers</small></p>
+              <p class="card-text"><small class="text-muted">₹2999</small></p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1769856808_7497150.jpg?w=360&dpr=2"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title border-bottom">TSS Originals:Vineyard</h5>
+              <p class="card-text"><small class="text-muted">Men Oversized Joggers</small></p>
+              <p class="card-text"><small class="text-muted">₹1899</small></p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselpolos1" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselpolos1" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <h3 class="text-center fw-bold py-lg-4">CATEGORIES</h3>
+
+  <div class="container my-5">
+
+
+    <div class="row g-4">
+
+      <!-- Card 1 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/tshirts_VSzPgIz.jpg?w=480&dpr=2"
+            class="img-fluid" alt="T-Shirts">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/shirts_zxYUuSO.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Shirts">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/tops_lFv4BrQ.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Winter Edit">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-lg-4 col-md-5">
+        <div>
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/pants_lansS3W.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/jeans_gxINNMt.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/dresses__jumpsuits_RrY4qT2.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/jacket_Iem0Z03.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/sneaker_kg90oSN.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/access_Bv0PYBR.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Artboard_3_hyZ3M6m.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 11 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Artboard_1_7e4OJFJ.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+      <!-- Card 12 -->
+      <div class="col-lg-4 col-md-5">
+        <div class="text-center">
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Artboard_2_NlWcwDO.jpg?w=480&dpr=2"
+            class="img-fluid" alt="Joggers">
+          <h6 class="mt-3"></h6>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <h3 class="text-center fw-bold py-lg-4">WHAT'S TRENDING IN POLOS</h3>
+
+
+  <div id="poloCarousel" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-inner">
+
+      <!-- ===== SLIDE 1 ===== -->
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">JERSEY STYLED</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/1_DoZFzVb.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>TSS Originals: Souled 13</h6>
+                  <p class="text-muted mb-1">Oversized Polos</p>
+                  <strong>₹1299</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">SMART POLO</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/2_1_0IAbbni.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Pique Polo: Phantom</h6>
+                  <p class="text-muted mb-1">Polos</p>
+                  <strong>₹1099</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">JERSEY-INSPIRED</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/3_1_6xH0NfC.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Looney Tunes: Let's Hustle</h6>
+                  <p class="text-muted mb-1">Oversized Polos</p>
+                  <strong>₹1399</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">SMART POLO</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/4_weZ80Eo.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Premium Flat Knit: Blaze</h6>
+                  <p class="text-muted mb-1">Polos</p>
+                  <strong>₹1299</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 2 ===== -->
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">HEAVY GAUGE</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/5_1_JlzgkEy.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>TSS Originals: Alpha</h6>
+                  <p class="text-muted mb-1">Oversized Polos</p>
+                  <strong>₹1299</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">SMART POLO</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/6_2_7hzcM0z.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Pique Polo: Night</h6>
+                  <p class="text-muted mb-1">Polos</p>
+                  <strong>₹1199</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">STREETWEAR</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/9_2KjSfQn.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Hustler Polo</h6>
+                  <p class="text-muted mb-1">Oversized Polos</p>
+                  <strong>₹1399</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <div class="card polo-card">
+                <div class="polo-tag">PREMIUM KNIT</div>
+                <img
+                  src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/8_9XQ42DM.jpg?w=360&dpr=2"
+                  class="card-img-top">
+                <div class="card-body">
+                  <h6>Flat Knit: Sage</h6>
+                  <p class="text-muted mb-1">Polos</p>
+                  <strong>₹1299</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTROLS -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#poloCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#poloCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <h3 class="text-center fw-bold py-lg-4">CRAFTED WITH INTENT</h3>
+
+  <!-- card 61 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/collection_tile_r92hpCH.jpg?w=480&dpr=2"
+            alt="Oversized T-Shirt">
+        </div>
+      </div>
+
+      <!-- card 62 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/collection_tile_male_Yq8sdix.jpg?w=480&dpr=2"
+            alt="Oversized T-Shirt">
+        </div>
+      </div>
+
+      <!-- card 63 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/Office_big_tile_final_bnmrRsL.jpg?w=480&dpr=2"
+            alt="Oversized T-Shirt">
+        </div>
+      </div>
+
+      <!-- card 64 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/product-images/collection-tile_ay9Gv82.jpg?w=480&dpr=2"
+            alt="Oversized T-Shirt">
+        </div>
+      </div>
+    </DIV>
+  </DIV>
+
+  <!-- card 71 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1709982174_2321643.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">solids:off white</div>
+            <div class="product-category">Men utility shirts</div>
+            <div class="product-price">₹ 1599 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 72 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1728971995_1687681.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">plaid:Black and Red</div>
+            <div class="product-category">Men Relaxed Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 73 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1743260702_1000648.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Linen:Anchor Crest</div>
+            <div class="product-category">Cotton Linen shirts</div>
+            <div class="product-price">₹ 1699 </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- card 74 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1718715190_2252621.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Linen:Ocean Blue</div>
+            <div class="product-category">Cotton Linen shirts</div>
+            <div class="product-price">₹ 1599 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 81 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1744905622_6711198.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">cotton linen stripes:coastal</div>
+            <div class="product-category">cotton linen shirts</div>
+            <div class="product-price">₹ 1499</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- card 82 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1738743277_5793074.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+
+          <div class="product-info">
+            <div class="product-title">cotton linen stripes:Azure</div>
+            <div class="product-category">cotton linen shirts</div>
+            <div class="product-price">₹ 1599</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 83 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1770314337_5206899.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">star wars:Darth vader</div>
+            <div class="product-category">Men High Top Sneakers</div>
+            <div class="product-price">₹ 3499 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 84 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1766767367_6144587.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Straight Fit Denim:Aristo</div>
+            <div class="product-category">Men Jeans</div>
+            <div class="product-price">₹ 2299 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 91 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1752497402_4971549.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">HTTYD:Night Fury Chibi</div>
+            <div class="product-category">Over sized T-shirts</div>
+            <div class="product-price">₹ 799 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 92 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1731309919_2939997.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Jacquard polo</div>
+            <div class="product-category">Over sized Polos:Harry potter Hogwards</div>
+            <div class="product-price">₹ 1399 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 93 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1744389555_5675870.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Venom:Pure Destruction</div>
+            <div class="product-category">Holiday Shirts</div>
+            <div class="product-price">₹ 1399 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 94 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1726832044_9390942.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Lenin:Midnight Black</div>
+            <div class="product-category">Cotton Lenin Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 10 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1769147321_3426947.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Peanuts:Snoopy In India</div>
+            <div class="product-category">Over Sized Tea-Shirts</div>
+            <div class="product-price">₹ 1199 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 10 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1725620786_8965954.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">TTS Originals:Indie Terrain</div>
+            <div class="product-category">Men Textured Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 10 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1765344329_2075212.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">TTS Originals:Indie Terrain</div>
+            <div class="product-category">Denim Jackets</div>
+            <div class="product-price">₹ 2399 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 10 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1767895525_1249188.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Harry Potter:Wanted</div>
+            <div class="product-category">Men Oversized:Hoodies</div>
+            <div class="product-price">₹ 1699 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 11 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1759402985_7251204.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Oversized Shirt:Echoes of Harappa</div>
+            <div class="product-category">Oversized Shirts</div>
+            <div class="product-price">₹ 1299 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 11 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1739004679_6532599.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Cotton Lenin:Stripes Dune</div>
+            <div class="product-category">Cotton Lenin Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 11 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1766144375_3068074.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">UBZ NXT:Loom</div>
+            <div class="product-category">Men Loop Top Sneakers</div>
+            <div class="product-price">₹ 2599</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 11 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1729179407_1727748.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Souled Originals:Phantom</div>
+            <div class="product-category">Oversized T-shirs</div>
+            <div class="product-price">₹ 1299 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 12 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1743056041_7072875.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Spider Man:Peter parker</div>
+            <div class="product-category">Over Sized Tea-Shirts</div>
+            <div class="product-price">₹ 1199 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 12 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1749817476_2237076.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Ben 10:Omnitrix</div>
+            <div class="product-category">Oversized T-shirs</div>
+            <div class="product-price">₹ 1099 </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- card 12 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1767187648_5148246.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Plaid shacket:checkerboard</div>
+            <div class="product-category">Men Shackets</div>
+            <div class="product-price">₹ 1799 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 12 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1751475635_4162755.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Jacquard:Blue Retro</div>
+            <div class="product-category">Oversized Polos</div>
+            <div class="product-price">₹ 1399 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- card 13 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1761910723_2672296.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Peanuts:Be an outsider</div>
+            <div class="product-category">Men Relaxed Shirts</div>
+            <div class="product-price">₹ 1799 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 13 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1716009254_7300840.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Lenin:Sky Blue</div>
+            <div class="product-category">Cotton Lenin Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 13 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1756526415_7482277.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Nomad:Lines of stitch</div>
+            <div class="product-category">Cotton Lines Shirt</div>
+            <div class="product-price">₹ 2199 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 13 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1752910892_6268573.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Courage:Different Day</div>
+            <div class="product-category">Oversized T-shirts</div>
+            <div class="product-price">₹ 1099 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 14 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1750766762_6113095.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Over sized shirt:State of Mind</div>
+            <div class="product-category">Oversized shirts</div>
+            <div class="product-price">₹ 1599 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 14 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1763982326_5044945.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">TTS Originals:Seven Chakras</div>
+            <div class="product-category">Oversized T-shirts</div>
+            <div class="product-price">₹ 1799 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 14 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713961601_3287348.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Solid:Black(oversized)</div>
+            <div class="product-category">Oversized Full Sleeve T-shirts</div>
+            <div class="product-price">₹ 949 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 14 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1726832802_2148908.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Lenin:Dark Sage</div>
+            <div class="product-category">Cotton Lenin shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 15 1 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1762924081_6872458.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+          <div class="product-info">
+            <div class="product-title">Harry potter:Marauder's Map(Solar)</div>
+            <div class="product-category">Oversized T-shirts</div>
+            <div class="product-price">₹ 1599 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 15 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1754715290_1467120.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Tectured Shirt:Mulberry</div>
+            <div class="product-category">MenTectured Shirts</div>
+            <div class="product-price">₹ 1599 </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 15 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1766818655_7608932.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">TSS Originals:Iris Color Block</div>
+            <div class="product-category">Men Oversized Hoodies</div>
+            <div class="product-price">₹ 2299 </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- card 15 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card">
+
+          <img
+            src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1743400291_9687488.jpg?w=360&dpr=2"
+            alt="Oversized T-Shirt">
+
+
+          <div class="product-info">
+            <div class="product-title">Cotton Lenin:Bold Black</div>
+            <div class="product-category">Cotton Lenin Shirts</div>
+            <div class="product-price">₹ 1499 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- footer -->
+
+
+  <div class="container text-center mb-4">
+    <hr class="footer-line">
+    <p>
+    <h1 class="homegrown">HOMEGROWN INDIAN BRAND</h1>
+    </p>
+    <h1 class="fw-bold">Over <span class="text-dark">6 Million</span> Happy Customers</h1>
+  </div>
+
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer class="footer pt-4">
+
+    <div class="container">
+      <div class="row">
+
+        <!-- NEED HELP -->
+        <div class="col-md-3">
+          <h6 class="footer-title">NEED HELP</h6>
+          <ul class="list-unstyled footer-list">
+            <li>Contact Us</li>
+            <li>Track Order</li>
+            <li>Returns & Refunds</li>
+            <li>FAQs</li>
+            <li>My Account</li>
+          </ul>
+          <p class="small mb-1"><i class="fa-solid fa-indian-rupee-sign me-1"></i> COD Available</p>
+          <p class="small"><i class="fa-solid fa-rotate me-1"></i> 30 Days Easy Returns & Exchanges</p>
+        </div>
+
+        <!-- COMPANY -->
+        <div class="col-md-3">
+          <h6 class="footer-title">COMPANY</h6>
+          <ul class="list-unstyled footer-list">
+            <li>About Us</li>
+            <li>Investor Relation</li>
+            <li>Careers</li>
+            <li>Gift Vouchers</li>
+            <li>Community Initiatives</li>
+          </ul>
+        </div>
+
+        <!-- MORE INFO -->
+        <div class="col-md-3">
+          <h6 class="footer-title">MORE INFO</h6>
+          <ul class="list-unstyled footer-list">
+            <li>
+              <a href="https://www.thesouledstore.com/terms-and-conditions" target="_blank">
+                T&C
+              </a>
+            </li>
+            <li>Privacy Policy</li>
+            <li>Sitemap</li>
+            <li>Get Notified</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+
+        <!-- STORE NEAR ME -->
+        <div class="col-md-3">
+          <h6 class="footer-title">STORE NEAR ME</h6>
+          <ul class="list-unstyled footer-list">
+            <li>Mumbai</li>
+            <li>Pune</li>
+            <li>Bangalore</li>
+            <li>Hubballi</li>
+            <li class="text-primary fw-semibold">View More</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- APP DOWNLOAD -->
+      <div class="text-center my-4">
+        <p class="fw-semibold mb-2">
+          <i class="fa-solid fa-mobile-screen me-1"></i>
+          EXPERIENCE THE SOULED STORE APP
+        </p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="40"
+          class="me-2">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" height="40">
+      </div>
+
+      <!-- SOCIAL ICONS -->
+      <div class="d-flex justify-content-end align-items-center mb-4">
+        <span class="me-2">Follow Us:</span>
+        <i class="fab fa-facebook-f social-icon"></i>
+        <i class="fab fa-instagram social-icon"></i>
+        <i class="fab fa-snapchat social-icon"></i>
+        <i class="fab fa-x-twitter social-icon"></i>
+      </div>
+
+      <!-- WHO WE ARE BAR -->
+      <div class="footer-bottom d-flex justify-content-between align-items-center px-3 py-3 mb-4">
+        <span class="fw-bold text-danger">WHO WE ARE</span>
+        <span class="fw-bold text-danger fs-4">+</span>
+      </div>
+
+      <!-- PAYMENT & SHIPPING -->
+      <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+        <span class="fw-semibold">100% Secure Payment:</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/512px-PhonePe_Logo.svg.png"
+          height="22">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Mastercard-logo.png/512px-Mastercard-logo.png"
+          height="22">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/512px-Paytm_Logo_%28standalone%29.svg.png"
+          height="22">
+        <span class="ms-4 fw-semibold">Shipping Partners:</span>
+        <img src="https://prod-img.thesouledstore.com/static/icons/dtdc.png?w=70&dpr=2" height="22">
+        <img src="https://prod-img.thesouledstore.com/static/icons/delivery.png?w=70&dpr=2" height="22">
+        <img src="https://prod-img.thesouledstore.com/public/theSoul/images/icons/ECOM-Express.png?w=70&dpr=2"
+          height="22">
+      </div>
+
+      <!-- COPYRIGHT -->
+      <div class="text-center small text-muted mt-3">
+        © The Souled Store 2026-27
+      </div>
+
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
